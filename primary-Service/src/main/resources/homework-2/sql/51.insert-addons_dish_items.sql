@@ -1,0 +1,1 @@
+INSERT INTO addons_dish_items (dish_items_id, addons_id, quantity) VALUES (1,1,5);

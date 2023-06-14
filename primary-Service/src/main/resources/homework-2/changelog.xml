@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro 
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd"
+        logicalFilePath="homework-2">
+
+        <changeSet id="homework-2-privilege" author="Vlad Lisay">
+            <sqlFile encoding="utf8" path="./sql/01.create-privilege-table.sql" relativeToChangelogFile="true"/>
+        </changeSet>
+
+
+<!--    <changeSet id="homework-2-privilege" author="Vlad Lisay">-->
+<!--        <createTable tableName="privileges">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(255)"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="homework-2-roles" author="Vlad Lisay">-->
+<!--        <createTable tableName="roles">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(25)"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="homework-2-users" author="Vlad Lisay">-->
+<!--        <createTable tableName="users">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="first_name" type="varchar(255)"/>-->
+<!--            <column name="last_name" type="varchar(255)"/>-->
+<!--            <column name="mail" type="varchar(255)"/>-->
+<!--            <column name="phone" type="varchar(255)"/>-->
+<!--            <column name="password" type="varchar(255)"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-status" author="Vlad Lisay">-->
+<!--        <createTable tableName="status">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(25)"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-menu" author="Vlad Lisay">-->
+<!--        <createTable tableName="menu">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(25)"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-addons_category" author="Vlad Lisay">-->
+<!--        <createTable tableName="addons_category">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(25)"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-measure_units" author="Vlad Lisay">-->
+<!--        <createTable tableName="measure_units">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="si_unit" type="varchar(25)"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-roles_privileges" author="Vlad Lisay">-->
+<!--        <createTable tableName="roles_privileges">-->
+<!--            <column name="privilege_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="privilege_role_fk" referencedTableName="privileges"-->
+<!--                             referencedColumnNames="id"/>-->
+<!--            </column>-->
+<!--            <column name="role_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="role_privilege_fk" referencedTableName="roles"-->
+<!--                             referencedColumnNames="id"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="homework-2-users_roles" author="Vlad Lisay">-->
+<!--        <createTable tableName="users_roles">-->
+<!--            <column name="user_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="users_role_fk" referencedTableName="users"-->
+<!--                             referencedColumnNames="id"/>-->
+<!--            </column>-->
+<!--            <column name="role_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="role_users_fk" referencedTableName="roles"-->
+<!--                             referencedColumnNames="id"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="homework-2-orders" author="Vlad Lisay">-->
+<!--        <createTable tableName="orders">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="user_id" type="integer">-->
+<!--                <constraints foreignKeyName="order_user_fk" referencedTableName="users" referencedColumnNames="id"-->
+<!--                             deleteCascade="true"/>-->
+<!--            </column>-->
+<!--            <column name="status_id" type="integer" defaultValue="1">-->
+<!--                <constraints foreignKeyName="order_status_fk" referencedTableName="status" referencedColumnNames="id"/>-->
+<!--            </column>-->
+<!--            <column name="price" type="numeric"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-dishes" author="Vlad Lisay">-->
+<!--        <createTable tableName="dishes">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(255)"/>-->
+<!--            <column name="base_price" type="numeric"/>-->
+<!--            <column name="menu_id" type="integer" defaultValue="1">-->
+<!--                <constraints foreignKeyName="dish_menu_fk" referencedTableName="menu" referencedColumnNames="id"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+
+<!--    <changeSet id="homework-2-carts" author="Vlad Lisay">-->
+<!--        <createTable tableName="carts">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false" unique="true"/>-->
+<!--            </column>-->
+<!--            <column name="user_id" type="integer">-->
+<!--                <constraints foreignKeyName="carts_users_fk" referencedTableName="users" referencedColumnNames="id"-->
+<!--                             deleteCascade="true" unique="true"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-addons" author="Vlad Lisay">-->
+<!--        <createTable tableName="addons">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="category_id" type="integer">-->
+<!--                <constraints foreignKeyName="addons_category_fk" referencedTableName="addons_category"-->
+<!--                             referencedColumnNames="id"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(255)"/>-->
+<!--            <column name="price" type="numeric"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-ingredients" author="Vlad Lisay">-->
+<!--        <createTable tableName="ingredients">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false" unique="true"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="varchar(255)"/>-->
+<!--            <column name="quantity" type="integer"/>-->
+<!--            <column name="measure_unit_id" type="integer">-->
+<!--                <constraints foreignKeyName="ingredients_measure_unit_fk" referencedTableName="measure_units"-->
+<!--                             referencedColumnNames="id"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-dish_items" author="Vlad Lisay">-->
+<!--        <createTable tableName="dish_items">-->
+<!--            <column name="id" type="serial">-->
+<!--                <constraints primaryKey="true" nullable="false" unique="true"/>-->
+<!--            </column>-->
+<!--            <column name="price" type="numeric"/>-->
+<!--            <column name="dish_id" type="integer">-->
+<!--                <constraints foreignKeyName="dish_items_dish_fk" referencedTableName="dishes" referencedColumnNames="id"-->
+<!--                             deleteCascade="true"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-addons_dish_items" author="Vlad Lisay">-->
+<!--        <createTable tableName="addons_dish_items">-->
+<!--            <column name="dish_items_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="addon_dish_items_fk" referencedTableName="dish_items"-->
+<!--                             referencedColumnNames="id" deleteCascade="true"/>-->
+<!--            </column>-->
+<!--            <column name="addons_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="dish_items_addon_fk" referencedTableName="addons"-->
+<!--                             referencedColumnNames="id" deleteCascade="true"/>-->
+<!--            </column>-->
+<!--            <column name="quantity" type="integer"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+
+<!--    <changeSet id="homework-2-ordered_dishes" author="Vlad Lisay">-->
+<!--        <createTable tableName="ordered_dishes">-->
+<!--            <column name="order_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="order_dish_item_fk" referencedTableName="orders"-->
+<!--                             referencedColumnNames="id" deleteCascade="true"/>-->
+<!--            </column>-->
+<!--            <column name="dish_item_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="dish_item_order_fk" referencedTableName="dish_items"-->
+<!--                             referencedColumnNames="id" deleteCascade="true"/>-->
+<!--            </column>-->
+<!--            <column name="quantity" type="integer"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-dishes_addons" author="Vlad Lisay">-->
+<!--        <createTable tableName="dishes_addons">-->
+<!--            <column name="dish_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="dish_addon_fk" referencedTableName="users"-->
+<!--                             referencedColumnNames="id"/>-->
+<!--            </column>-->
+<!--            <column name="addon_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="addon_dish_fk" referencedTableName="roles"-->
+<!--                             referencedColumnNames="id"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-dishes_ingredients" author="Vlad Lisay">-->
+<!--        <createTable tableName="dishes_ingredients">-->
+<!--            <column name="dish_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="dish_ingredient_fk" referencedTableName="dishes"-->
+<!--                             referencedColumnNames="id" deleteCascade="true"/>-->
+<!--            </column>-->
+<!--            <column name="ingredient_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="ingredient_dish_fk" referencedTableName="ingredients"-->
+<!--                             referencedColumnNames="id" deleteCascade="true"/>-->
+<!--            </column>-->
+<!--            <column name="measure_unit_id" type="integer" defaultValue="1">-->
+<!--                <constraints foreignKeyName="dishes_ingredients_measure_units_fk" referencedTableName="measure_units"-->
+<!--                             referencedColumnNames="id" deleteCascade="true"/>-->
+<!--            </column>-->
+<!--            <column name="volume" type="decimal"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+<!--    <changeSet id="homework-2-cart_dishes" author="Vlad Lisay">-->
+<!--        <createTable tableName="cart_dishes">-->
+<!--            <column name="dish_item_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="dish_item_cart_fk" referencedTableName="dish_items"-->
+<!--                             referencedColumnNames="id" deleteCascade="true"/>-->
+<!--            </column>-->
+<!--            <column name="cart_id" type="integer">-->
+<!--                <constraints primaryKey="true" foreignKeyName="cart_dish_item_fk" referencedTableName="carts"-->
+<!--                             referencedColumnNames="id" deleteCascade="true"/>-->
+<!--            </column>-->
+<!--            <column name="quantity" type="integer"/>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+    <changeSet id="homework-2-role" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/02.create-role-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-user" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/03.create-user-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-status" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/04.create-status-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-menu" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/05.create-menu-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-addon_category" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/06.create-addon_category-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-measure_unit" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/07.create-measure_unit-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-role_privilege" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/08.create-role_privilege-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-role_user" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/09.create-role_user-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-order" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/10.create-order-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-dish" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/11.create-dish-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-cart" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/12.create-cart-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-addon" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/13.create-addon-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-ingredient" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/14.create-ingredient-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-create-dish_items-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/48.create-dish_items-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-create-addons_dish_items-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/50.create-addons_dish_items-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-ordered_dish" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/15.create-ordered_dish-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-dish_addon" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/16.create-dish_addon-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-dish_ingredient" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/17.create-dish_ingredient-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-dish_cart" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/18.create-dish_cart-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-index-role_privilege" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/19.create-index-role_privilege-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-index-role_user" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/20.create-index-role_user-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-index-order-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/21.create-index-order-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-index-dish-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/22.create-index-dish-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-index-cart-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/23.create-index-cart-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-index-addon-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/24.create-index-addon-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-index-ingredient-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/25.create-index-ingredient-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-index-ordered_dish-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/26.create-index-ordered_dish-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-index-dish_addon-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/27.create-index-dish_addon-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-index-dish_ingredient-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/28.create-index-dish_ingredient-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-index-dish_cart-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/29.create-index-dish_cart-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-measure_unit-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/30.insert-into-measure_unit.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-privilege-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/31.insert-into-privilege.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-role-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/32.insert-into-role.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-user-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/33.insert-into-user.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-status-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/34.insert-into-status.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-menu-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/35.insert-into-menu.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-into-addon_category-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/36.insert-into-addon_category.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-addon-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/37.insert-into-addon.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-ingredient-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/38.insert-into-ingredient.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-role_privilege-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/39.insert-into-role_privilege.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-user_role-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/40.insert-into-user_role.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-dish-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/41.insert-into-dish.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-dish-items-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/49.insert-into-dish-items-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-addons_dish_items" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/51.insert-addons_dish_items.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-dish_ingredient-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/42.insert-into-dish_ingredient.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-dish_addon-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/43.insert-into-dish_addon.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-cart-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/44.insert-into-cart.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-dish_cart-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/45.insert-into-dish_cart.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-order-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/46.insert-into-order.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-insert-into-ordered_dish-table" author="Vlad Lisay">
+        <sqlFile encoding="utf8" path="./sql/47.insert-into-ordered_dish.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+</databaseChangeLog> 
