@@ -25,6 +25,7 @@ public class DishesAddons {
     @HashCodeExclude
     @EqualsExclude
     private Addons addons;
+
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dish_id")

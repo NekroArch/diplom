@@ -7,5 +7,5 @@ import java.sql.SQLException;
 
 public interface DishItemService extends Service<DishItemDto> {
     void deleteDishFromCart(Integer dishId);
-    void saveDishItemInCartWithRelations(DishForCartDto dishForCartDto) throws SQLException, InterruptedException;
+    void saveDishItemInCartWithRelations(DishForCartDto dishForCartDto, Integer id) throws SQLException, InterruptedException;
 }

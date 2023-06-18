@@ -25,9 +25,4 @@ public class MeasureUnits extends AbstractEntity {
     @HashCodeExclude
     @EqualsExclude
     private List<Ingredients> ingredients;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "measureUnits")
-    @ToString.Exclude
-    @HashCodeExclude
-    @EqualsExclude
-    private List<DishesIngredients> dishesIngredients;
 }

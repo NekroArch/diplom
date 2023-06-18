@@ -18,8 +18,10 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "carts")
 public class Carts extends AbstractEntity {
+
     @OneToOne(fetch = FetchType.LAZY)
     private Users user;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cart")
     @ToString.Exclude
     @HashCodeExclude

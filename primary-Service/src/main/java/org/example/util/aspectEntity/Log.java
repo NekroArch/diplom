@@ -1,4 +1,4 @@
-package org.example.entity.aspectEntity;
+package org.example.util.aspectEntity;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -13,10 +13,16 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Log {
+
     Object returnValue;
+
     String args;
+
     String workingMethod;
+
     String methodName;
+
     LocalDateTime localDateTime;
+
     Long runningTime;
 }

@@ -4,9 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.AddonsCategoryDto;
-import org.example.dto.Pageable;
 import org.example.service.AddonsCategoryService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,15 +25,13 @@ public class AddonsCategoryController {
     private ObjectMapper objectMapper;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('user', 'admin')")
-    public List<AddonsCategoryDto> getAll(@RequestParam Pageable pageable) throws Exception {
+    public List<AddonsCategoryDto> getAll(@PageableDefault Pageable pageable) throws Exception {
         log.info("Executing method getAll");
 
         return addonsCategoryService.getAll(pageable);
     }
 
     @GetMapping(value = "/{id}")
-    @PreAuthorize("hasAnyAuthority('user', 'admin')")
     public AddonsCategoryDto getById(@PathVariable int id) throws JsonProcessingException, SQLException, InterruptedException {
         log.info("Executing method getById");
 

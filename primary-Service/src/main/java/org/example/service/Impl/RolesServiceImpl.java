@@ -3,10 +3,10 @@ package org.example.service.Impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.RolesDao;
-import org.example.dto.Pageable;
 import org.example.dto.RolesDto;
 import org.example.mapper.RolesMapper;
 import org.example.service.RolesService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,9 +36,13 @@ public class RolesServiceImpl implements RolesService {
 
     @Transactional
     @Override
-    public RolesDto save(RolesDto entityDto) throws SQLException, InterruptedException {
+    public RolesDto save(RolesDto entityDto){
         log.debug("Executing method save with {}", entityDto);
-        return rolesMapper.mapToRoleDto(rolesDao.save(rolesMapper.mapToRole(entityDto)));
+        try {
+            return rolesMapper.mapToRoleDto(rolesDao.save(rolesMapper.mapToRole(entityDto)));
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Transactional

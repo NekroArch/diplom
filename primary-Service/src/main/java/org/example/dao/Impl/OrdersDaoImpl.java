@@ -8,10 +8,12 @@ import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.example.dao.OrdersDao;
-import org.example.dto.Pageable;
 import org.example.entity.*;
+import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -82,7 +84,7 @@ public class OrdersDaoImpl extends AbstractDaoImpl<Orders> implements OrdersDao 
                 """, Orders.class);
 
         query.setParameter("id", id);
-        List<Orders> resultList = query.setFirstResult(pageable.getOffset())
+        List<Orders> resultList = query.setFirstResult(pageable.getPage())
                                        .setMaxResults(pageable.getSize())
                                        .getResultList();
         return resultList;

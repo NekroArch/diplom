@@ -34,7 +34,7 @@ public class AuthenticationController {
     CartsService cartsService;
 
     @PostMapping(value = "/login")
-    public String login(@Valid @RequestBody LoginDto loginDto, HttpServletResponse response) {
+    public String login(@RequestBody LoginDto loginDto, HttpServletResponse response) {
         log.info("Executing method login");
 
         authenticationManager.authenticate(
@@ -48,7 +48,7 @@ public class AuthenticationController {
     }
 
     @PostMapping(value = "/register")
-    public void register(@Valid @RequestBody UsersDto usersDto) throws SQLException, InterruptedException {
+    public void register(@Valid @RequestBody UsersDto usersDto) {
         log.info("Executing method register");
 
         UsersDto save = userService.save(usersDto);

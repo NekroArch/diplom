@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.MeasureUnitsDao;
 import org.example.dto.MeasureUnitsDto;
-import org.example.dto.Pageable;
 import org.example.mapper.MeasureUnitsMapper;
 import org.example.service.MeasureUnitsService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,9 +35,13 @@ public class MeasureUnitsServiceImpl implements MeasureUnitsService {
 
     @Transactional
     @Override
-    public MeasureUnitsDto save(MeasureUnitsDto entityDto) throws SQLException, InterruptedException {
+    public MeasureUnitsDto save(MeasureUnitsDto entityDto){
         log.debug("Executing method save with {}", entityDto);
-        return measureUnitsMapper.mapToMeasureUnitsDto(measureUnitsDao.save(measureUnitsMapper.mapToMeasureUnits(entityDto)));
+        try {
+            return measureUnitsMapper.mapToMeasureUnitsDto(measureUnitsDao.save(measureUnitsMapper.mapToMeasureUnits(entityDto)));
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Transactional

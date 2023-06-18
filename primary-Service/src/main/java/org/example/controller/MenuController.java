@@ -3,9 +3,10 @@ package org.example.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.MenuDto;
-import org.example.dto.Pageable;
 import org.example.service.MenuService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,15 +20,15 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('user','admin')")
-    public List<MenuDto> getAll(@RequestParam Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
+    @PreAuthorize("hasAnyAuthority('user','admin', 'anonymous')")
+    public List<MenuDto> getAll(@PageableDefault Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
         log.info("Executing method getAll");
 
         return menuService.getAll(pageable);
     }
 
     @GetMapping(value = "/{id}")
-    @PreAuthorize("hasAnyAuthority('user','admin')")
+    @PreAuthorize("hasAnyAuthority('user','admin', 'anonymous')")
     public MenuDto getById(@PathVariable int id) throws JsonProcessingException, SQLException, InterruptedException {
         log.info("Executing method getById");
 

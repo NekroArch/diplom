@@ -1,7 +1,7 @@
 CREATE TABLE ingredients
 (
  id              serial NOT NULL,
- name            varchar(255) NOT NULL,
+ name            varchar(100) NOT NULL,
  measure_unit_id integer DEFAULT 1,
  quantity        integer NOT NULL,
  PRIMARY KEY ( id ),

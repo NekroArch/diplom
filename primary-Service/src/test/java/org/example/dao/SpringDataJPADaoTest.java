@@ -1,10 +1,10 @@
-package org.example;
+package org.example.dao;
 
+import org.example.TestContainersConfig;
 import org.example.config.DatabaseConfig;
 import org.example.dao.SpringDataJPADao;
 import org.example.dao.UserDao;
 import org.example.entity.Users;
-import org.example.view.UserView;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -106,28 +106,28 @@ public class SpringDataJPADaoTest {
         Assert.assertEquals(user, usersById);
     }
 
-    @Transactional
-    @Test
-    public void findByMailIdWithProjectionsTest() throws SQLException, InterruptedException {
-
-        Users user = Users.builder()
-                .firstName("firstname")
-                .lastName("lastname")
-                .mail("31323@gmail.com")
-                .phone("32234553")
-                .password("24342523")
-                .build();
-
-        Users saveDishes = userDao.save(user);
-
-        UserView byMail = springDataJPADao.findByMail(saveDishes.getMail());
-
-        String mail = byMail.getMail();
-        String phone = byMail.getPhone();
-
-        Assert.assertEquals(user.getMail(), mail);
-        Assert.assertEquals(user.getPhone(), phone);
-    }
+//    @Transactional
+//    @Test
+//    public void findByMailIdWithProjectionsTest() throws SQLException, InterruptedException {
+//
+//        Users user = Users.builder()
+//                .firstName("firstname")
+//                .lastName("lastname")
+//                .mail("31323@gmail.com")
+//                .phone("32234553")
+//                .password("24342523")
+//                .build();
+//
+//        Users saveDishes = userDao.save(user);
+//
+//        UserView byMail = springDataJPADao.findByMail(saveDishes.getMail());
+//
+//        String mail = byMail.getMail();
+//        String phone = byMail.getPhone();
+//
+//        Assert.assertEquals(user.getMail(), mail);
+//        Assert.assertEquals(user.getPhone(), phone);
+//    }
 
     @Test
     public void findUsersByMailWithRolesTest() {

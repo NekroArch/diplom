@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class Log {
 
     @Id
-    ObjectId id;
+    String id;
 
     @Nullable
     Object returnValue;

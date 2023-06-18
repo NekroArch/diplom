@@ -22,12 +22,16 @@ public class Users extends AbstractEntity {
 
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
+
     @Column(name = "mail")
     private String mail;
+
     @Column(name = "phone")
     private String phone;
+
     @Column(name = "password")
     private String password;
 

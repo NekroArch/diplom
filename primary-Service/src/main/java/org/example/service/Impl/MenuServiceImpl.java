@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.MenuDao;
 import org.example.dto.MenuDto;
-import org.example.dto.Pageable;
 import org.example.mapper.MenuMapper;
 import org.example.service.MenuService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,9 +36,13 @@ public class MenuServiceImpl implements MenuService {
     }
     @Transactional
     @Override
-    public MenuDto save(MenuDto entityDto) throws SQLException, InterruptedException {
+    public MenuDto save(MenuDto entityDto){
         log.debug("Executing method save with {}", entityDto);
-        return menuMapper.mapToMenuDto(menuDao.save(menuMapper.mapToMenu(entityDto)));
+        try {
+            return menuMapper.mapToMenuDto(menuDao.save(menuMapper.mapToMenu(entityDto)));
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     @Transactional
     @Override

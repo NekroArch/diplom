@@ -1,13 +1,16 @@
 package org.example.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.CartsDto;
 import org.example.dto.DishForCartDto;
-import org.example.dto.Pageable;
 import org.example.service.CartsService;
 import org.example.service.DishItemService;
+import org.example.util.myUser.Jwt;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,21 +25,31 @@ public class CartsController {
     private CartsService cartsService;
     @Autowired
     private DishItemService dishItemService;
+    @Autowired
+    private Jwt jwt;
 
     @GetMapping
     @PreAuthorize("hasAnyAuthority('admin')")
-    public List<CartsDto> getAll(@RequestParam Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
+    public List<CartsDto> getAll(@PageableDefault Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
         log.info("Executing method getAll");
 
         return cartsService.getAll(pageable);
     }
 
     @GetMapping(value = "/{id}")
-    @PreAuthorize("hasAnyAuthority('user', 'admin')")
+    @PreAuthorize("hasAnyAuthority('admin')")
     public CartsDto getById(@PathVariable int id) throws JsonProcessingException, SQLException, InterruptedException {
         log.info("Executing method getById");
 
         return cartsService.getById(id);
+    }
+
+    @GetMapping("/user-cart")
+    @PreAuthorize("isAuthenticated()")
+    public CartsDto getUserCart(HttpServletRequest request) throws SQLException, InterruptedException {
+        log.info("Executing method getUserCart");
+
+        return cartsService.getById(jwt.getUser(request).getId());
     }
 
     @PostMapping
@@ -49,10 +62,10 @@ public class CartsController {
 
     @PostMapping(value = "/add-dish")
     @PreAuthorize("hasAnyAuthority('user', 'admin')")
-    public void addDishInCart(@RequestBody DishForCartDto cart) throws JsonProcessingException, SQLException, InterruptedException {
+    public void addDishInCart(@RequestBody DishForCartDto cart, HttpServletRequest request) throws JsonProcessingException, SQLException, InterruptedException {
         log.info("Executing method addDishInCart");
 
-        dishItemService.saveDishItemInCartWithRelations(cart);
+        dishItemService.saveDishItemInCartWithRelations(cart, jwt.getUser(request).getId());
     }
 
     @DeleteMapping(value = "/delete-dish")
@@ -78,4 +91,6 @@ public class CartsController {
 
         return cartsService.update(cart);
     }
+
+
 }

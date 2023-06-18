@@ -22,10 +22,12 @@ public class CartDishes{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dish_item_id")
     private DishItems dishItems;
+
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
     private Carts cart;
+
     @Column(name = "quantity")
     private Integer quantity;
 

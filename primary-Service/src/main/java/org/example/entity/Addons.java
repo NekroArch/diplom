@@ -18,8 +18,10 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Addons extends AbstractEntity {
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "price")
     private BigDecimal price;
 

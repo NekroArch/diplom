@@ -19,6 +19,5 @@ import java.util.Map;
 public class DishForCartDto {
     private Integer dishId;
     private Map<Integer, Integer> addonIdToQuantity;
-    private Integer cartId;
     private Integer dishQuantity;
 }

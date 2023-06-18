@@ -13,5 +13,5 @@ import java.math.BigDecimal;
 public class IngredientsDto extends AbstractDto{
     private String name;
     private BigDecimal quantity;
-    private MeasureUnitsDto measureUnitsId;
+    private MeasureUnitsDto measureUnits;
 }

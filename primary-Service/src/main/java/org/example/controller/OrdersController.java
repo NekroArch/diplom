@@ -1,11 +1,14 @@
 package org.example.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.OrdersDto;
-import org.example.dto.Pageable;
 import org.example.service.OrdersService;
+import org.example.util.myUser.Jwt;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +22,12 @@ public class OrdersController {
     @Autowired
     private OrdersService ordersService;
 
+    @Autowired
+    private Jwt jwt;
+
     @GetMapping
     @PreAuthorize("hasAnyAuthority('admin')")
-    public List<OrdersDto> getAll(@RequestParam Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
+    public List<OrdersDto> getAll(@PageableDefault Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
         log.info("Executing method getAll");
 
         return ordersService.getAll(pageable);
@@ -60,19 +66,19 @@ public class OrdersController {
     }
 
     @PostMapping(value = "/create-orders")
-    @PreAuthorize("hasAnyAuthority('user','admin')")
-    public void createOrder(Integer userId) {
+    @PreAuthorize("isAuthenticated()")
+    public void createOrder(HttpServletRequest request) {
         log.info("Executing method createOrder");
 
-        ordersService.saveOrderFromCart(userId);
+        ordersService.saveOrderFromCart(jwt.getUser(request).getId());
     }
 
-    @GetMapping(value = "/get-orders/{id}")
-    @PreAuthorize("hasAnyAuthority('user','admin')")
-    public List<OrdersDto> getAllOrdersForUser(@PathVariable Integer id, Pageable pageable){
+    @GetMapping(value = "/get-orders")
+    @PreAuthorize("isAuthenticated()")
+    public List<OrdersDto> getAllOrdersForUser(@PageableDefault Pageable pageable, HttpServletRequest request){
         log.info("Executing method getAllOrdersForUser");
 
-        return ordersService.getAllOrdersForUser(id, pageable);
+        return ordersService.getAllOrdersForUser(jwt.getUser(request).getId(), pageable);
     }
 
 

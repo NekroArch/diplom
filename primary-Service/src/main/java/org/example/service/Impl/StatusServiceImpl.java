@@ -3,10 +3,10 @@ package org.example.service.Impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.StatusDao;
-import org.example.dto.Pageable;
 import org.example.dto.StatusDto;
 import org.example.mapper.StatusMapper;
 import org.example.service.StatusService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,9 +34,13 @@ public class StatusServiceImpl implements StatusService {
     }
     @Transactional
     @Override
-    public StatusDto save(StatusDto entityDto) throws SQLException, InterruptedException {
+    public StatusDto save(StatusDto entityDto){
         log.debug("Executing method save with {}", entityDto);
-        return statusMapper.mapToStatusDto(statusDao.save(statusMapper.mapToStatus(entityDto)));
+        try {
+            return statusMapper.mapToStatusDto(statusDao.save(statusMapper.mapToStatus(entityDto)));
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     @Transactional
     @Override

@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.AddonsDao;
 import org.example.dto.AddonsDto;
-import org.example.dto.Pageable;
 import org.example.mapper.AddonsMapper;
 import org.example.service.AddonsService;
+import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -35,9 +37,13 @@ public class AddonsServiceImpl implements AddonsService {
 
     @Transactional
     @Override
-    public AddonsDto save(AddonsDto entityDto) throws SQLException, InterruptedException {
+    public AddonsDto save(AddonsDto entityDto){
         log.debug("Executing method save with {}", entityDto);
-        return addonsMapper.mapToAddonsDto(addonsDao.save(addonsMapper.mapToAddons(entityDto)));
+        try {
+            return addonsMapper.mapToAddonsDto(addonsDao.save(addonsMapper.mapToAddons(entityDto)));
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Transactional

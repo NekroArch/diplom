@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.IngredientsDao;
 import org.example.dto.IngredientsDto;
-import org.example.dto.Pageable;
 import org.example.mapper.IngredientsMapper;
 import org.example.service.IngredientsService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,9 +35,13 @@ public class IngredientsServiceImpl implements IngredientsService {
     }
     @Transactional
     @Override
-    public IngredientsDto save(IngredientsDto entityDto) throws SQLException, InterruptedException {
+    public IngredientsDto save(IngredientsDto entityDto){
         log.debug("Executing method save with {}", entityDto);
-        return ingredientsMapper.mapToIngredientsDto(ingredientsDao.save(ingredientsMapper.mapToIngredients(entityDto)));
+        try {
+            return ingredientsMapper.mapToIngredientsDto(ingredientsDao.save(ingredientsMapper.mapToIngredients(entityDto)));
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     @Transactional
     @Override

@@ -19,7 +19,6 @@ import java.util.Set;
 public class DishesDto extends AbstractDto {
     private String name;
     private BigDecimal price;
-    private MenuDto menu;
     private List<AddonsDto> dishesAddons;
     private List<DishesIngredientsDto> dishesIngredients;
 }

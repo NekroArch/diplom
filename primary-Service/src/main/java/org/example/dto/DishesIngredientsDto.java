@@ -14,5 +14,4 @@ import java.math.BigDecimal;
 public class DishesIngredientsDto {
     private IngredientsDto ingredient;
     private BigDecimal volume;
-    private MeasureUnitsDto measureUnits;
 }

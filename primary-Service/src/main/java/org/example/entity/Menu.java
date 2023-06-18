@@ -16,8 +16,10 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "menu")
 public class Menu extends AbstractEntity {
+
     @Column(name = "name")
     private String name;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
     @HashCodeExclude
     @EqualsExclude

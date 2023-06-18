@@ -18,8 +18,10 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class AddonsCategory extends AbstractEntity {
+
     @JoinColumn(name = "name")
     private String name;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
     @ToString.Exclude
     @HashCodeExclude

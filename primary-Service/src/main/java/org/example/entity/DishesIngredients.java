@@ -26,6 +26,7 @@ public class DishesIngredients {
     @HashCodeExclude
     @EqualsExclude
     private Ingredients ingredient;
+
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dish_id")
@@ -35,11 +36,5 @@ public class DishesIngredients {
     private Dishes dish;
     @Column(name = "volume")
     private BigDecimal volume;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "measure_unit_id")
-    @ToString.Exclude
-    @HashCodeExclude
-    @EqualsExclude
-    private MeasureUnits measureUnits;
 
 }

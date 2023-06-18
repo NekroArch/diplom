@@ -6,4 +6,6 @@ public interface CartsDao extends AbstractDao<Carts> {
     Carts getDishInCartsWithFetchById(Integer id);
 
     void clearCardByUserId(Integer userId);
+
+    Integer getCartIdByUserId(Integer id);
 }

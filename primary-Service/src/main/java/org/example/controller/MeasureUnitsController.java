@@ -3,9 +3,10 @@ package org.example.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.MeasureUnitsDto;
-import org.example.dto.Pageable;
 import org.example.service.MeasureUnitsService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class MeasureUnitsController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('admin')")
-    public List<MeasureUnitsDto> getAll(@RequestParam Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
+    public List<MeasureUnitsDto> getAll( @PageableDefault Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
         log.info("Executing method getAll");
 
         return measureUnitsService.getAll(pageable);

@@ -2,10 +2,11 @@ package org.example.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
-import org.example.dto.Pageable;
 import org.example.dto.RolesDto;
 import org.example.service.RolesService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class RoleController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('admin')")
-    public List<RolesDto> getAll(@RequestParam Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
+    public List<RolesDto> getAll(@PageableDefault Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
         log.info("Executing method getAll");
 
         return rolesService.getAll(pageable);

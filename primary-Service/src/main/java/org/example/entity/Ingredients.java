@@ -18,10 +18,13 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ingredients")
 public class Ingredients extends AbstractEntity {
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "quantity")
     private BigDecimal quantity;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "measure_unit_id")
     @ToString.Exclude

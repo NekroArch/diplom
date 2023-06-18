@@ -1,10 +1,8 @@
 package org.example.service.Impl;
 
-import jakarta.persistence.NoResultException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.UserDao;
-import org.example.dto.Pageable;
 import org.example.dto.UsersDto;
 import org.example.entity.Privileges;
 import org.example.entity.Roles;
@@ -12,6 +10,8 @@ import org.example.entity.Users;
 import org.example.mapper.UserMapper;
 import org.example.service.Impl.Exceptions.UserExistsException;
 import org.example.service.UserService;
+import org.example.util.myUser.MyUser;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Transactional
     @Override
-    public UsersDto save(UsersDto entityDto) throws SQLException, InterruptedException {
+    public UsersDto save(UsersDto entityDto){
         log.debug("Executing method save with {}", entityDto);
 
         Users users = userMapper.mapToUsers(entityDto);
@@ -61,8 +61,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
 
         users.setPassword(passwordEncoder.encode(users.getPassword()));
-        users.setRoles(List.of(Roles.builder().id(1).build()));
-        Users save = userDao.save(users);
+        users.setRoles(List.of(Roles.builder().id(2).build()));
+        Users save = null;
+        try {
+            save = userDao.save(users);
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
         return userMapper.mapToUserDto(save);
     }
 
@@ -89,11 +94,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         Users user;
         try {
             user = userDao.getUserByMailWithRole(username);
-        } catch (NoResultException e) {
+        } catch (Exception e) {
             throw new BadCredentialsException(String.format("User with mail %s not found", username));
         }
 
-        return new User(
+        return new MyUser(
+                user.getId(),
                 user.getMail(),
                 user.getPassword(),
                 getAuthorities(user.getRoles())

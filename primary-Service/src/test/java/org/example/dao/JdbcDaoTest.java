@@ -1,5 +1,6 @@
-package org.example;
+package org.example.dao;
 
+import org.example.TestContainersConfig;
 import org.example.config.DatabaseConfig;
 import org.example.dao.JdbcDao;
 import org.junit.Assert;
@@ -21,7 +22,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
         loader = AnnotationConfigContextLoader.class
 )
 @SpringBootTest
-@Testcontainers
+//@Testcontainers
 public class JdbcDaoTest {
 
     @Autowired

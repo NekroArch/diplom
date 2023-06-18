@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.*;
 import org.example.dto.CartsDto;
-import org.example.dto.Pageable;
 import org.example.entity.*;
 import org.example.mapper.CartsMapper;
 import org.example.service.CartsService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +24,8 @@ public class CartsServiceImpl implements CartsService {
 
     private final CartsDao cartsDao;
 
+    private final UserDao userDao;
+
 
     @Override
     public List<CartsDto> getAll(Pageable pageable) throws SQLException, InterruptedException {
@@ -38,11 +40,27 @@ public class CartsServiceImpl implements CartsService {
         return cartsMapper.mapToCartsDto(byId);
     }
 
+    @Override
+    public CartsDto getById(String userName) {
+        log.debug("Executing method getById with id {}", userName);
+        Carts byId = null;
+        try {
+            byId = cartsDao.getById(userDao.getUserByMail(userName).getId());
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return cartsMapper.mapToCartsDto(byId);
+    }
+
     @Transactional
     @Override
-    public CartsDto save(CartsDto entityDto) throws SQLException, InterruptedException {
+    public CartsDto save(CartsDto entityDto){
         log.debug("Executing method save with {}", entityDto);
-        return cartsMapper.mapToCartsDto(cartsDao.save(cartsMapper.mapToCarts(entityDto)));
+        try {
+            return cartsMapper.mapToCartsDto(cartsDao.save(cartsMapper.mapToCarts(entityDto)));
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Transactional

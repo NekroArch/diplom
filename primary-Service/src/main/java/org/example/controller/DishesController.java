@@ -3,9 +3,10 @@ package org.example.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.DishesDto;
-import org.example.dto.Pageable;
 import org.example.service.DishesService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +20,7 @@ public class DishesController {
     @Autowired
     private DishesService dishesService;
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('user', 'admin')")
-    public List<DishesDto> getAll(Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
+    public List<DishesDto> getAll(@PageableDefault Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
         log.info("Executing method getAll");
 
         return dishesService.getAll(pageable);

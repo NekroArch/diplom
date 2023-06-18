@@ -1,7 +1,6 @@
 package org.example.dao;
 
 import org.example.entity.Users;
-import org.example.view.UserView;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -25,8 +24,8 @@ public interface SpringDataJPADao extends PagingAndSortingRepository<Users, Inte
     @Query(value = "SELECT u FROM Users u where u.id =:id")
     Users findUsersByIdWithJPQLQuery(@Param("id") Integer id);
 
-    @Query(value = "SELECT phone, mail FROM users where mail =:mail", nativeQuery = true)
-    UserView findByMail(@Param("mail") String mail);
+//    @Query(value = "SELECT phone, mail FROM users where mail =:mail", nativeQuery = true)
+//    UserView findByMail(@Param("mail") String mail);
 
     @EntityGraph(attributePaths = "roles")
     Users findUsersByMail(String mail);

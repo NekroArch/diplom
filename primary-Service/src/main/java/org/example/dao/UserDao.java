@@ -10,4 +10,6 @@ public interface UserDao extends AbstractDao<Users> {
     Users getUserByMailWithRole(String mail);
 
     boolean checkMail(String mail);
+
+    Users getUserByMail(String mail);
 }

@@ -5,10 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.dao.*;
 import org.example.dto.DishForCartDto;
 import org.example.dto.DishItemDto;
-import org.example.dto.Pageable;
 import org.example.entity.*;
 import org.example.mapper.DishItemMapper;
 import org.example.service.DishItemService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +27,7 @@ public class DishItemImpl implements DishItemService {
     private final AddonsDao addonsDao;
     private final AddonsDishItemDao addonsDishItemDao;
     private final CartDishDao cartDishDao;
+    private final CartsDao cartsDao;
 
     @Override
     public List<DishItemDto> getAll(Pageable pageable){
@@ -93,7 +94,7 @@ public class DishItemImpl implements DishItemService {
 
     @Transactional
     @Override
-    public void saveDishItemInCartWithRelations(DishForCartDto dishForCartDto) {
+    public void saveDishItemInCartWithRelations(DishForCartDto dishForCartDto, Integer id) {
         log.debug("Executing method saveDishItemInCartWithRelations with {}", dishForCartDto);
 
         BigDecimal price = calculatePriceForTheDish(dishForCartDto);
@@ -102,14 +103,14 @@ public class DishItemImpl implements DishItemService {
 
         saveRelationsBetweenDishItemAndAddons(dishForCartDto, dishItems);
 
-        saveRelationsBetweenDishItemAndCarts(dishForCartDto, dishItems);
+        saveRelationsBetweenDishItemAndCarts(dishForCartDto, dishItems, id);
 
     }
 
-    private void saveRelationsBetweenDishItemAndCarts(DishForCartDto dishForCartDto, DishItems dishItems) {
+    private void saveRelationsBetweenDishItemAndCarts(DishForCartDto dishForCartDto, DishItems dishItems, Integer id) {
         cartDishDao.save(CartDishes.builder()
                                    .dishItems(DishItems.builder().id(dishItems.getId()).build())
-                                   .cart(Carts.builder().id(dishForCartDto.getCartId()).build())
+                                   .cart(Carts.builder().id(cartsDao.getCartIdByUserId(id)).build())
                                    .quantity(dishForCartDto.getDishQuantity())
                                    .build());
     }

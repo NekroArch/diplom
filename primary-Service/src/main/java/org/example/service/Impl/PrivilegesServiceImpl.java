@@ -3,10 +3,10 @@ package org.example.service.Impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.PrivilegesDao;
-import org.example.dto.Pageable;
 import org.example.dto.PrivilegesDto;
 import org.example.mapper.PrivilegesMapper;
 import org.example.service.PrivilegesService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,9 +36,13 @@ public class PrivilegesServiceImpl implements PrivilegesService {
 
     @Transactional
     @Override
-    public PrivilegesDto save(PrivilegesDto entityDto) throws SQLException, InterruptedException {
+    public PrivilegesDto save(PrivilegesDto entityDto){
         log.debug("Executing method save with {}", entityDto);
-        return privilegesMapper.mapToPrivilegesDto(privilegesDao.save(privilegesMapper.mapToPrivileges(entityDto)));
+        try {
+            return privilegesMapper.mapToPrivilegesDto(privilegesDao.save(privilegesMapper.mapToPrivileges(entityDto)));
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Transactional

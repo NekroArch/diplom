@@ -19,17 +19,21 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "orders")
 public class Orders extends AbstractEntity {
+
     @Column(name = "price")
     private BigDecimal price;
     @ManyToOne
+
     @JoinColumn(name = "user_id")
     @ToString.Exclude
     @HashCodeExclude
     @EqualsExclude
     private Users users;
+
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
     @ToString.Exclude
     @HashCodeExclude

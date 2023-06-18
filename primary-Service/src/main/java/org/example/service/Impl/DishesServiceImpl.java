@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.DishesDao;
 import org.example.dto.DishesDto;
-import org.example.dto.Pageable;
 import org.example.mapper.DishMapper;
 import org.example.service.DishesService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,9 +36,13 @@ public class DishesServiceImpl implements DishesService {
 
     @Transactional
     @Override
-    public DishesDto save(DishesDto entityDto) throws SQLException, InterruptedException {
+    public DishesDto save(DishesDto entityDto){
         log.debug("Executing method save with {}", entityDto);
-        return dishMapper.mapToDishesDto(dishesDao.save(dishMapper.mapToDishes(entityDto)));
+        try {
+            return dishMapper.mapToDishesDto(dishesDao.save(dishMapper.mapToDishes(entityDto)));
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Transactional

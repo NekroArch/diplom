@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.dao.CartsDao;
 import org.example.dao.OrdersDao;
 import org.example.dto.OrdersDto;
-import org.example.dto.Pageable;
 import org.example.mapper.OrdersMapper;
 import org.example.service.OrdersService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,9 +39,13 @@ public class OrdersServiceImpl implements OrdersService {
     }
     @Transactional
     @Override
-    public OrdersDto save(OrdersDto entityDto) throws SQLException, InterruptedException {
+    public OrdersDto save(OrdersDto entityDto){
         log.debug("Executing method save with {}", entityDto);
-        return ordersMapper.mapToOrdersDTO(ordersDao.save(ordersMapper.mapToOrders(entityDto)));
+        try {
+            return ordersMapper.mapToOrdersDTO(ordersDao.save(ordersMapper.mapToOrders(entityDto)));
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     @Transactional
     @Override

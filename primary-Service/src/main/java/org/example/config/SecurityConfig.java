@@ -53,7 +53,8 @@ public class SecurityConfig {
                 .requestMatchers("/aunt/login", "/aunt/register").anonymous()
                 .requestMatchers("/actuator/**",
                         "/swagger-ui.html", "/v3/api-docs/**",
-                        "/swagger-ui/**").permitAll()
+                        "/swagger-ui/**", "/dish/{id}", "/dish",
+                        "/addonsCategory", "/addonsCategory/{id}").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

@@ -14,6 +14,7 @@ import java.io.Serializable;
 @EqualsAndHashCode()
 @MappedSuperclass
 public abstract class AbstractEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.AddonsCategoryDao;
 import org.example.dto.AddonsCategoryDto;
-import org.example.dto.Pageable;
 import org.example.mapper.AddonsCategoryMapper;
 import org.example.service.AddonsCategoryService;
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,9 +35,13 @@ public class AddonsCategoryServiceImpl implements AddonsCategoryService {
 
     @Transactional
     @Override
-    public AddonsCategoryDto save(AddonsCategoryDto entityDto) throws SQLException, InterruptedException {
+    public AddonsCategoryDto save(AddonsCategoryDto entityDto) {
         log.debug("Executing method save with {}", entityDto);
-        return addonsCategoryMapper.mapToAddonsCategoryDto(addonsCategoryDao.save(addonsCategoryMapper.mapToAddonsCategory(entityDto)));
+        try {
+            return addonsCategoryMapper.mapToAddonsCategoryDto(addonsCategoryDao.save(addonsCategoryMapper.mapToAddonsCategory(entityDto)));
+        } catch (InterruptedException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Transactional

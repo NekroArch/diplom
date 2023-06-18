@@ -7,8 +7,8 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.example.dao.AbstractDao;
-import org.example.dto.Pageable;
 import org.example.entity.AbstractEntity;
+import org.springdoc.core.converters.models.Pageable;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -27,7 +27,7 @@ public abstract class AbstractDaoImpl<T extends AbstractEntity> implements Abstr
         CriteriaQuery<T> query = builder.createQuery(getEntityClass());
         Root<T> from = query.from(getEntityClass());
         return entityManager.createQuery(query)
-                            .setFirstResult(pageable.getOffset())
+                            .setFirstResult(pageable.getPage())
                             .setMaxResults(pageable.getSize())
                             .getResultList();
     }
