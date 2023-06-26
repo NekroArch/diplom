@@ -2,8 +2,7 @@ package org.example.dao.Impl;
 
 import jakarta.persistence.TypedQuery;
 import org.example.dao.UserDao;
-import org.example.entity.Users;
-import org.springframework.stereotype.Component;
+import org.example.entities.entity.Users;
 import org.springframework.stereotype.Repository;
 
 @Repository

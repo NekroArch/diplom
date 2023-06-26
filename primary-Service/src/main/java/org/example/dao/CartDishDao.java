@@ -1,6 +1,6 @@
 package org.example.dao;
 
-import org.example.entity.CartDishes;
+import org.example.entities.entity.CartDishes;
 
 public interface CartDishDao{
     void save(CartDishes cartDishes);

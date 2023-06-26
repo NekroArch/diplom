@@ -1,7 +1,7 @@
 package org.example.mapper;
 
 import org.example.dto.AddonsDto;
-import org.example.entity.Addons;
+import org.example.entities.entity.Addons;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

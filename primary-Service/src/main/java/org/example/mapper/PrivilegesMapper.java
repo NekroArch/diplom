@@ -1,7 +1,7 @@
 package org.example.mapper;
 
 import org.example.dto.PrivilegesDto;
-import org.example.entity.Privileges;
+import org.example.entities.entity.Privileges;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

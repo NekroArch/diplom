@@ -19,6 +19,8 @@
     <modules>
         <module>mongo-Service</module>
         <module>primary-Service</module>
+        <module>user-Service</module>
+        <module>entities</module>
     </modules>
 
     <properties>

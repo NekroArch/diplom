@@ -6,7 +6,7 @@ import org.example.dao.MeasureUnitsDao;
 import org.example.dto.MeasureUnitsDto;
 import org.example.mapper.MeasureUnitsMapper;
 import org.example.service.MeasureUnitsService;
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -6,7 +6,7 @@ import org.example.dao.StatusDao;
 import org.example.dto.StatusDto;
 import org.example.mapper.StatusMapper;
 import org.example.service.StatusService;
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

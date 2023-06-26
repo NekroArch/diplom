@@ -1,7 +1,7 @@
 package org.example.mapper;
 
 import org.example.dto.DishItemDto;
-import org.example.entity.DishItems;
+import org.example.entities.entity.DishItems;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;

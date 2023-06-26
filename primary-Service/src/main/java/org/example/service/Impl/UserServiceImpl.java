@@ -4,23 +4,25 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.UserDao;
 import org.example.dto.UsersDto;
-import org.example.entity.Privileges;
-import org.example.entity.Roles;
-import org.example.entity.Users;
-import org.example.mapper.UserMapper;
-import org.example.service.Impl.Exceptions.UserExistsException;
+import org.example.entities.entity.Privileges;
+import org.example.entities.entity.Roles;
+import org.example.entities.entity.Users;
+import org.example.entities.utils.PageableDto;
 import org.example.service.UserService;
 import org.example.util.myUser.MyUser;
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -31,60 +33,24 @@ import java.util.*;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    private final UserMapper userMapper;
+    @Value("${routing.key.queue.user.delete}")
+    private String userDeleteRoutingKey;
+    @Value("${routing.key.queue.user.update}")
+    private String userUpdateRoutingKey;
+    @Value("${routing.key.queue.user.save}")
+    private String userSaveRoutingKey;
+
+    @Value("${user.exchange}")
+    private String userExchange;
+
+    @Value("${rest.user.template.url}")
+    private String url;
 
     private final UserDao userDao;
 
-    private final PasswordEncoder passwordEncoder;
+    private final RabbitTemplate rabbitTemplate;
 
-    @Override
-    public List<UsersDto> getAll(Pageable pageable) throws SQLException, InterruptedException {
-        log.debug("Executing method getAll");
-        return userDao.getAll(pageable).stream().map(userMapper::mapToUserDto).toList();
-    }
-
-    @Override
-    public UsersDto getById(int id) throws SQLException, InterruptedException {
-        log.debug("Executing method getById with id {}", id);
-        return userMapper.mapToUserDto(userDao.getById(id));
-    }
-
-    @Transactional
-    @Override
-    public UsersDto save(UsersDto entityDto){
-        log.debug("Executing method save with {}", entityDto);
-
-        Users users = userMapper.mapToUsers(entityDto);
-
-        if (userDao.checkMail(entityDto.getMail())) {
-            throw new UserExistsException(String.format("User with username %s exists", entityDto.getMail()));
-        }
-
-        users.setPassword(passwordEncoder.encode(users.getPassword()));
-        users.setRoles(List.of(Roles.builder().id(2).build()));
-        Users save = null;
-        try {
-            save = userDao.save(users);
-        } catch (InterruptedException | SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return userMapper.mapToUserDto(save);
-    }
-
-    @Transactional
-    @Override
-    public void delete(int id) throws SQLException, InterruptedException {
-        log.debug("Executing method delete with id {}", id);
-        userDao.delete(id);
-    }
-
-    @Transactional
-    @Override
-    public UsersDto update(UsersDto entityDto) throws SQLException, InterruptedException {
-        log.debug("Executing method update with {}", entityDto);
-        return userMapper.mapToUserDto(userDao.update(userMapper.mapToUsers(entityDto)));
-    }
-
+    private final RestTemplate restTemplate;
 
     @Override
     public UserDetails loadUserByUsername(String username) {
@@ -130,5 +96,67 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(privilege));
         }
         return authorities;
+    }
+
+    @Override
+    public List<UsersDto> getAll(Pageable pageable) {
+//        PageableDto pageableDto = new PageableDto(pageable.getPageNumber(), pageable.getPageSize());
+//        return rabbitTemplate.convertSendAndReceiveAsType(
+//                userExchange,
+//                userGetAllRoutingKey,
+//                pageableDto,
+//                new ParameterizedTypeReference<List<UsersDto>>() {
+//                }
+//        );
+
+        ArrayList n = new ArrayList<>(
+                Arrays.asList(
+                        Objects.requireNonNull(restTemplate.getForObject(url + "/users?page={page}&size={size}",
+                                UsersDto[].class,
+                                pageable.getPageNumber(), pageable.getPageSize())
+                        )
+                )
+        );
+        return n;
+    }
+
+    @Override
+    public UsersDto getById(int id) throws SQLException, InterruptedException {
+//        UsersDto usersDto = rabbitTemplate.convertSendAndReceiveAsType(
+//                userExchange,
+//                userGetRoutingKey,
+//                id,
+//                new ParameterizedTypeReference<UsersDto>() {}
+//        );
+
+        UsersDto forObject = restTemplate.getForObject(url + "/users/{id}", UsersDto.class, id);
+        return forObject;
+    }
+
+    @Override
+    public UsersDto save(UsersDto entityDto) {
+        return rabbitTemplate.convertSendAndReceiveAsType(
+                userExchange,
+                userSaveRoutingKey,
+                entityDto,
+                new ParameterizedTypeReference<UsersDto>() {
+                }
+        );
+    }
+
+    @Override
+    public void delete(int id) throws SQLException, InterruptedException {
+        rabbitTemplate.convertAndSend(userExchange, userDeleteRoutingKey, id);
+    }
+
+    @Override
+    public UsersDto update(UsersDto entityDto) throws SQLException, InterruptedException {
+        return rabbitTemplate.convertSendAndReceiveAsType(
+                userExchange,
+                userUpdateRoutingKey,
+                entityDto,
+                new ParameterizedTypeReference<UsersDto>() {
+                }
+        );
     }
 }

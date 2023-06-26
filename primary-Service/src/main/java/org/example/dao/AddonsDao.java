@@ -1,6 +1,6 @@
 package org.example.dao;
 
-import org.example.entity.Addons;
+import org.example.entities.entity.Addons;
 
 import java.math.BigDecimal;
 import java.util.List;

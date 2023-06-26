@@ -1,7 +1,7 @@
 package org.example.dao;
 
-import org.example.entity.Orders;
-import org.springdoc.core.converters.models.Pageable;
+import org.example.entities.entity.Orders;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 

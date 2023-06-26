@@ -6,7 +6,7 @@ import org.example.dao.RolesDao;
 import org.example.dto.RolesDto;
 import org.example.mapper.RolesMapper;
 import org.example.service.RolesService;
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

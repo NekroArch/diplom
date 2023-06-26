@@ -1,11 +1,10 @@
 package org.example.mapper;
 
-import org.example.dto.CartDishesDto;
 import org.example.dto.OrderedDishesDto;
 import org.example.dto.OrdersDto;
-import org.example.entity.CartDishes;
-import org.example.entity.OrderedDishes;
-import org.example.entity.Orders;
+import org.example.entities.entity.CartDishes;
+import org.example.entities.entity.OrderedDishes;
+import org.example.entities.entity.Orders;
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,7 +1,7 @@
 package org.example.service;
 
 import org.example.dto.OrdersDto;
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 

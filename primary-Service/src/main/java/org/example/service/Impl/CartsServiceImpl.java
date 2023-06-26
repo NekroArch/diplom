@@ -4,10 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.*;
 import org.example.dto.CartsDto;
-import org.example.entity.*;
+import org.example.entities.entity.Carts;
+import org.example.entities.entity.Users;
 import org.example.mapper.CartsMapper;
 import org.example.service.CartsService;
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

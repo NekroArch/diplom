@@ -6,12 +6,8 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.example.dao.AddonsDao;
-import org.example.dto.Pageable;
-import org.example.entity.Addons;
-import org.example.entity.Users_;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.example.entities.entity.Addons;
+import org.example.entities.entity.Users_;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;

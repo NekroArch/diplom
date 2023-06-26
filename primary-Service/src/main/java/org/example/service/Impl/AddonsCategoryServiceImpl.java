@@ -6,7 +6,7 @@ import org.example.dao.AddonsCategoryDao;
 import org.example.dto.AddonsCategoryDto;
 import org.example.mapper.AddonsCategoryMapper;
 import org.example.service.AddonsCategoryService;
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -5,10 +5,8 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Root;
 import org.example.dao.MenuDao;
-import org.example.entity.Dishes_;
-import org.example.entity.Menu;
-import org.example.entity.Menu_;
-import org.springframework.stereotype.Component;
+import org.example.entities.entity.Menu;
+import org.example.entities.entity.Menu_;
 import org.springframework.stereotype.Repository;
 
 @Repository

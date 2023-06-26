@@ -18,7 +18,7 @@ public class LogAspect {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${rest.template.url}")
+    @Value("${rest.mongo.template.url}")
     private String url;
 
     @Around("within(org.example.controller..*)")

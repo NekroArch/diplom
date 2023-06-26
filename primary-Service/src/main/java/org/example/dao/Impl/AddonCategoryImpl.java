@@ -2,9 +2,7 @@ package org.example.dao.Impl;
 
 import jakarta.persistence.TypedQuery;
 import org.example.dao.AddonsCategoryDao;
-import org.example.dto.Pageable;
-import org.example.entity.AddonsCategory;
-import org.springframework.stereotype.Component;
+import org.example.entities.entity.AddonsCategory;
 import org.springframework.stereotype.Repository;
 
 @Repository

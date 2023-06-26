@@ -1,18 +1,9 @@
 package org.example.dao.Impl;
 
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.example.dao.DishItemDao;
-import org.example.entity.*;
-import org.springframework.stereotype.Component;
+import org.example.entities.entity.DishItems;
 import org.springframework.stereotype.Repository;
-
-import java.sql.SQLException;
-import java.util.List;
 
 @Repository
 @RequiredArgsConstructor

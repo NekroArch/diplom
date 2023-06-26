@@ -1,15 +1,13 @@
 package org.example.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.example.entity.Addons;
-import org.example.entity.Ingredients;
-import org.example.entity.Menu;
-import org.example.entity.Orders;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 @SuperBuilder
 @Data

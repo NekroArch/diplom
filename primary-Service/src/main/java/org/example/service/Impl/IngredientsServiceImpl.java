@@ -6,7 +6,7 @@ import org.example.dao.IngredientsDao;
 import org.example.dto.IngredientsDto;
 import org.example.mapper.IngredientsMapper;
 import org.example.service.IngredientsService;
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

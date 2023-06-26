@@ -1,20 +1,12 @@
 package org.example.dao.Impl;
 
-import jakarta.persistence.EntityGraph;
 import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 import org.example.dao.CartsDao;
-import org.example.entity.Carts;
-import org.example.entity.Dishes;
-import org.example.entity.Users;
-import org.springframework.stereotype.Component;
+import org.example.entities.entity.Carts;
+import org.example.entities.entity.Dishes;
+import org.example.entities.entity.Users;
 import org.springframework.stereotype.Repository;
-
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Repository
 @RequiredArgsConstructor

@@ -1,7 +1,7 @@
 package org.example.dao;
 
-import org.example.entity.AbstractEntity;
-import org.springdoc.core.converters.models.Pageable;
+import org.example.entities.entity.AbstractEntity;
+import org.springframework.data.domain.Pageable;
 
 import java.sql.SQLException;
 import java.util.List;

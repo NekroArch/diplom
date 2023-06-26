@@ -2,10 +2,9 @@ package org.example.mapper;
 
 import org.example.dto.CartDishesDto;
 import org.example.dto.CartsDto;
-import org.example.entity.CartDishes;
-import org.example.entity.Carts;
+import org.example.entities.entity.CartDishes;
+import org.example.entities.entity.Carts;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

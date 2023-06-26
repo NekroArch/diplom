@@ -5,10 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.dao.*;
 import org.example.dto.DishForCartDto;
 import org.example.dto.DishItemDto;
-import org.example.entity.*;
+import org.example.entities.entity.*;
 import org.example.mapper.DishItemMapper;
 import org.example.service.DishItemService;
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,9 +1,8 @@
 package org.example.mapper;
 
-import org.example.dto.AddonsCategoryDto;
 import org.example.dto.RolesDto;
-import org.example.entity.AddonsCategory;
-import org.example.entity.Roles;
+import org.example.entities.entity.AddonsCategory;
+import org.example.entities.entity.Roles;
 import org.mapstruct.Mapper;
 
 

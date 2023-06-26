@@ -3,9 +3,15 @@ package org.example.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.UsersDto;
+import org.example.entities.entity.Users;
 import org.example.service.UserService;
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +31,7 @@ public class UserController {
     public List<UsersDto> getAll(@PageableDefault Pageable pageable) throws JsonProcessingException, SQLException, InterruptedException {
         log.info("Executing method getAll");
 
-        return userService.getAll(pageable);
+      return userService.getAll(pageable);
     }
 
     @GetMapping(value = "/{id}")
@@ -48,7 +54,6 @@ public class UserController {
     @PreAuthorize("hasAuthority('delete')")
     public void delete(@PathVariable int id) throws JsonProcessingException, SQLException, InterruptedException {
         log.info("Executing method delete");
-
         userService.delete(id);
     }
 

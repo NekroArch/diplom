@@ -35,27 +35,12 @@ public class DatabaseConfig {
     private String username;
     @Value("${spring.datasource.password}")
     private String password;
-    @Value("${hibernate.dialect}")
-    private String dialect;
-    @Value("${hibernate.show_sql}")
-    private String showSql;
-
     @Bean
     public SpringLiquibase liquibase(DataSource dataSource) {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setChangeLog("classpath:changelog-master.xml");
         liquibase.setDataSource(dataSource);
         return liquibase;
-    }
-
-    @Bean
-    public JdbcTemplate jdbcTemplate (DataSource dataSource){
-        return new JdbcTemplate(dataSource);
-    }
-
-    @Bean
-    public Connection connection() throws SQLException {
-        return dataSource().getConnection();
     }
 
     @Bean
@@ -68,31 +53,5 @@ public class DatabaseConfig {
         dataSource.setPassword(password);
 
         return dataSource;
-    }
-
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSource);
-        entityManagerFactoryBean.setPackagesToScan("org.example.entity");
-        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setJpaProperties(getProperties());
-
-        return entityManagerFactoryBean;
-    }
-
-    @Bean
-    public PlatformTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
-        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-        jpaTransactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
-        return jpaTransactionManager;
-    }
-
-    @Bean
-    public Properties getProperties() {
-        final Properties properties = new Properties();
-        properties.put("hibernate.dialect", dialect);
-        properties.put("hibernate.show_sql", showSql);
-        return properties;
     }
 }

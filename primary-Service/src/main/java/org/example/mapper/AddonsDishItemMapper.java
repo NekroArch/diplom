@@ -1,7 +1,7 @@
 package org.example.mapper;
 
 import org.example.dto.AddonsDishItemDto;
-import org.example.entity.AddonsDishItem;
+import org.example.entities.entity.AddonsDishItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -6,7 +6,7 @@ import org.example.dao.MenuDao;
 import org.example.dto.MenuDto;
 import org.example.mapper.MenuMapper;
 import org.example.service.MenuService;
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,7 +1,7 @@
 package org.example.mapper;
 
 import org.example.dto.MeasureUnitsDto;
-import org.example.entity.MeasureUnits;
+import org.example.entities.entity.MeasureUnits;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

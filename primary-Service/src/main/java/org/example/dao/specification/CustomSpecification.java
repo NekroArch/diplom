@@ -1,7 +1,7 @@
 package org.example.dao.specification;
 
-import org.example.entity.Users;
-import org.example.entity.Users_;
+import org.example.entities.entity.Users;
+import org.example.entities.entity.Users_;
 import org.springframework.data.jpa.domain.Specification;
 
 public class CustomSpecification{

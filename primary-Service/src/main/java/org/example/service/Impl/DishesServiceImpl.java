@@ -6,7 +6,7 @@ import org.example.dao.DishesDao;
 import org.example.dto.DishesDto;
 import org.example.mapper.DishMapper;
 import org.example.service.DishesService;
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
