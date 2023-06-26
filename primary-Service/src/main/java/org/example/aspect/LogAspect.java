@@ -18,9 +18,6 @@ public class LogAspect {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${rest.mongo.template.url}")
-    private String url;
-
     @Around("within(org.example.controller..*)")
     public Object saveLog(ProceedingJoinPoint joinPoint) {
 
@@ -35,7 +32,7 @@ public class LogAspect {
 
         Log build = Log.builder().returnValue(proceed).args(Arrays.toString(joinPoint.getArgs())).workingMethod(String.valueOf(joinPoint.getSignature().getDeclaringType())).methodName(joinPoint.getSignature().getName()).runningTime(timeAfter - timeBefore).build();
 
-        restTemplate.postForObject(url + "/api-mongo-log", build, Log.class);
+        restTemplate.postForObject("http://"+ "MONGO" + "/api-mongo-log", build, Log.class);
 
         return proceed;
     }

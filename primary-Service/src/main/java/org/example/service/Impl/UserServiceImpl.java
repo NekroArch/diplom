@@ -43,9 +43,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Value("${user.exchange}")
     private String userExchange;
 
-    @Value("${rest.user.template.url}")
-    private String url;
-
     private final UserDao userDao;
 
     private final RabbitTemplate rabbitTemplate;
@@ -111,7 +108,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         ArrayList n = new ArrayList<>(
                 Arrays.asList(
-                        Objects.requireNonNull(restTemplate.getForObject(url + "/users?page={page}&size={size}",
+                        Objects.requireNonNull(restTemplate.getForObject("http://"+ "USER" + "/users?page={page}&size={size}",
                                 UsersDto[].class,
                                 pageable.getPageNumber(), pageable.getPageSize())
                         )
@@ -129,7 +126,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //                new ParameterizedTypeReference<UsersDto>() {}
 //        );
 
-        UsersDto forObject = restTemplate.getForObject(url + "/users/{id}", UsersDto.class, id);
+        UsersDto forObject = restTemplate.getForObject("http://"+ "USER" + "/users/{id}", UsersDto.class, id);
         return forObject;
     }
 
