@@ -1,14 +1,14 @@
 version: "3.9"
 
 services:
-#  mongo_database:
-#    container_name: mongo_db
-#    image: mongo
-#    environment:
-#      - MONGO_INITDB_DATABASE=test
-#    ports:
-#      - '27017:27017'
-#    restart: always
+  mongo_database:
+    container_name: mongo_db
+    image: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=test
+    ports:
+      - '27017:27017'
+    restart: always
 
   postgres_database:
     container_name: postgresDB
@@ -28,14 +28,14 @@ services:
       - 5672:5672
       - 15672:15672
 
-#  mongo_service:
-#    container_name: mongo_service
-#    build: mongo-Service/
-#    ports:
-#      - '8081:8081'
-#      - '5006:5006'
-#    environment:
-#      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006
+  mongo_service:
+    container_name: mongo_service
+    build: mongo-Service/
+    ports:
+      - '8081:8081'
+      - '5006:5006'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006
 
   web:
     container_name: main
