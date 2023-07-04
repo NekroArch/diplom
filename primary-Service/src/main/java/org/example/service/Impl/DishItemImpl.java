@@ -5,12 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.dao.*;
 import org.example.dto.DishForCartDto;
 import org.example.dto.DishItemDto;
-import org.example.dto.DishesDto;
-import org.example.entities.entity.*;
 import org.example.mapper.DishItemMapper;
 import org.example.service.DishItemService;
-import org.example.service.Impl.sendtype.SendDishItemForCart;
-import org.springframework.amqp.rabbit.AsyncRabbitTemplate;
+import org.example.service.Impl.SendType.SendDishItemForCart;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -19,8 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 

@@ -29,6 +29,7 @@
         <module>dish-Service</module>
         <module>cart-Service</module>
         <module>dishitem-Service</module>
+        <module>order-Service</module>
     </modules>
 
     <properties>

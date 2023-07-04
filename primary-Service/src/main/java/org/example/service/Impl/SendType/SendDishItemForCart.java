@@ -1,4 +1,4 @@
-package org.example.service.Impl.sendtype;
+package org.example.service.Impl.SendType;
 
 import lombok.Data;
 import lombok.Getter;
