@@ -1,4 +1,4 @@
-package org.example.config;
+package org.example.config.rabbit;
 
 import org.apache.commons.collections4.BagUtils;
 import org.springframework.amqp.core.*;
@@ -31,31 +31,6 @@ public class RabbitConfig {
     @Value("${spring.rabbitmq.port}")
     private Integer port;
 
-    @Value("${rabbitmq.queue.delete.user}")
-    private String userDeleteQueue;
-    @Value("${rabbitmq.queue.save.user}")
-    private String userSaveQueue;
-    @Value("${rabbitmq.queue.update.user}")
-    private String userUpdateQueue;
-    @Value("${rabbitmq.queue.get.user}")
-    private String userGetQueue;
-    @Value("${rabbitmq.queue.getall.user}")
-    private String userGetAllQueue;
-
-    @Value("${routing.key.queue.user.delete}")
-    private String userDeleteRoutingKey;
-    @Value("${routing.key.queue.user.save}")
-    private String userSaveRoutingKey;
-    @Value("${routing.key.queue.user.update}")
-    private String userUpdateRoutingKey;
-    @Value("${routing.key.queue.user.get}")
-    private String userGetRoutingKey;
-    @Value("${routing.key.queue.user.getall}")
-    private String userGetAllRoutingKey;
-
-    @Value("${user.exchange}")
-    private String userExchange;
-
     @Bean
     public ConnectionFactory connectionFactory(){
         CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory();
@@ -77,41 +52,6 @@ public class RabbitConfig {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
         rabbitTemplate.setMessageConverter(jsonMessageConverter());
         return rabbitTemplate;
-    }
-
-    @Bean
-    public DirectExchange userExchange(){
-        return new DirectExchange(userExchange);
-    }
-
-    @Bean
-    public Queue userDeleteQueue(){
-        return new Queue(userDeleteQueue);
-    }
-
-    @Bean
-    public Binding userBinding(){
-        return BindingBuilder.bind(userDeleteQueue()).to(userExchange()).with(userDeleteRoutingKey);
-    }
-
-    @Bean
-    public Queue userSaveQueue(){
-        return new Queue(userSaveQueue);
-    }
-
-    @Bean
-    public Binding userSaveBinding(){
-        return BindingBuilder.bind(userSaveQueue()).to(userExchange()).with(userSaveRoutingKey);
-    }
-
-    @Bean
-    public Queue userUpdateQueue(){
-        return new Queue(userUpdateQueue);
-    }
-
-    @Bean
-    public Binding userUpdateBinding(){
-        return BindingBuilder.bind(userUpdateQueue()).to(userExchange()).with(userUpdateRoutingKey);
     }
 
     @Bean

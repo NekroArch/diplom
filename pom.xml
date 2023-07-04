@@ -22,6 +22,13 @@
         <module>user-Service</module>
         <module>entities</module>
         <module>eureka-Service</module>
+        <module>dish-Service</module>
+        <module>addon-Service</module>
+        <module>ingredients-Service</module>
+        <module>role-Service</module>
+        <module>dish-Service</module>
+        <module>cart-Service</module>
+        <module>dishitem-Service</module>
     </modules>
 
     <properties>

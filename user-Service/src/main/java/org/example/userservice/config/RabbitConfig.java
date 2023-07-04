@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 
+    routing.key.queue.user.getidbyusername = queue.getidbyusername.delete
+
     @Value("${rabbitmq.queue.delete.user}")
     private String userDeleteQueue;
     @Value("${rabbitmq.queue.save.user}")
@@ -23,6 +25,8 @@ public class RabbitConfig {
     private String userGetQueue;
     @Value("${rabbitmq.queue.getall.user}")
     private String userGetAllQueue;
+    @Value("${rabbitmq.queue.getidbyusername.user}")
+    private String userGetIdByUserNameQueue;
 
     @Value("${routing.key.queue.user.delete}")
     private String userDeleteRoutingKey;
@@ -34,6 +38,8 @@ public class RabbitConfig {
     private String userGetRoutingKey;
     @Value("${routing.key.queue.user.getall}")
     private String userGetAllRoutingKey;
+    @Value("${routing.key.queue.user.getidbyusername}")
+    private String userGetIdByUserNameKey;
 
     @Value("${user.exchange}")
     private String userExchange;
@@ -69,6 +75,11 @@ public class RabbitConfig {
     }
 
     @Bean
+    public Queue userGetIdByUserNameQueue() {
+        return new Queue(userGetIdByUserNameQueue);
+    }
+
+    @Bean
     public Binding userDeleteBinding() {
         return BindingBuilder.bind(userDeleteQueue()).to(userExchange()).with(userDeleteRoutingKey);
     }
@@ -91,6 +102,11 @@ public class RabbitConfig {
     @Bean
     public Binding userGetAllBinding() {
         return BindingBuilder.bind(userGetAllQueue()).to(userExchange()).with(userGetAllRoutingKey);
+    }
+
+    @Bean
+    public Binding userGetIdByUserNameBinding() {
+        return BindingBuilder.bind(userGetIdByUserNameQueue()).to(userExchange()).with(userGetIdByUserNameKey);
     }
 
     @Bean

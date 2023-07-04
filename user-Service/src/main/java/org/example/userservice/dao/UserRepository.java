@@ -14,4 +14,6 @@ public interface UserRepository extends CrudRepository<Users, Integer>, PagingAn
 
     @Query(value = "select u.firstName, u.lastName, u.mail, u.phone, u.password from Users u where u.id = :id")
     Users findUserByIdWithoutRolesAndOrders(Integer id);
+
+    Users findUsersByMail(String username);
 }

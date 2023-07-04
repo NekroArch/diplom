@@ -7,14 +7,12 @@ import org.example.dto.UsersDto;
 import org.example.entities.entity.Privileges;
 import org.example.entities.entity.Roles;
 import org.example.entities.entity.Users;
-import org.example.entities.utils.PageableDto;
 import org.example.service.UserService;
 import org.example.util.myUser.MyUser;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -106,15 +104,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //                }
 //        );
 
-        ArrayList n = new ArrayList<>(
-                Arrays.asList(
-                        Objects.requireNonNull(restTemplate.getForObject("http://"+ "USER" + "/users?page={page}&size={size}",
+        return List.of(Objects.requireNonNull(restTemplate.getForObject("http://" + "USER" + "/users?page={page}&size={size}",
                                 UsersDto[].class,
-                                pageable.getPageNumber(), pageable.getPageSize())
-                        )
-                )
-        );
-        return n;
+                                pageable.getPageNumber(), pageable.getPageSize())));
     }
 
     @Override
@@ -126,7 +118,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //                new ParameterizedTypeReference<UsersDto>() {}
 //        );
 
-        UsersDto forObject = restTemplate.getForObject("http://"+ "USER" + "/users/{id}", UsersDto.class, id);
+        UsersDto forObject = restTemplate.getForObject("http://" + "USER" + "/users/{id}", UsersDto.class, id);
         return forObject;
     }
 

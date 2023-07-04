@@ -79,4 +79,11 @@ public class UserServiceImpl implements UserService {
       //  log.debug("Executing method update with {}", entityDto);
         return userMapper.mapToUserDto(userDao.save(userMapper.mapToUsers(entityDto)));
     }
+
+    @RabbitListener(queues = "${rabbitmq.queue.getidbyusername.user}")
+    @Override
+    public Integer findIdByUserName(String userName) {
+        return userDao.findUsersByMail(userName).getId();
+    }
+
 }

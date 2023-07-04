@@ -34,17 +34,6 @@ services:
       - 5672:5672
       - 15672:15672
 
-  mongo_service:
-    container_name: mongo_service
-    build: mongo-Service/
-    ports:
-      - '8081:8081'
-      - '5006:5006'
-    environment:
-      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006
-    depends_on:
-      - eureka
-
   web:
     container_name: main
     build: primary-Service/
@@ -57,6 +46,18 @@ services:
     depends_on:
       - postgres_database
       - rabbitMQ
+      - eureka
+
+
+  mongo_service:
+    container_name: mongo_service
+    build: mongo-Service/
+    ports:
+      - '8081:8081'
+      - '5006:5006'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006
+    depends_on:
       - eureka
 
   user:
@@ -72,3 +73,81 @@ services:
       - postgres_database
       - rabbitMQ
       - eureka
+
+  dish_service:
+    container_name: dish_service
+    build: dish-service/
+    ports:
+      - '8083:8083'
+      - '5008:5008'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5008
+    depends_on:
+      - postgres_database
+      - eureka
+      - rabbitMQ
+
+  addons_service:
+    container_name: addon_service
+    build: addon-Service/
+    ports:
+      - '8084:8084'
+      - '5009:5009'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5009
+    depends_on:
+      - postgres_database
+      - eureka
+      - rabbitMQ
+
+  ingredient_service:
+    container_name: ingredient_service
+    build: ingredients-Service/
+    ports:
+      - '8085:8085'
+      - '5010:5010'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5010
+    depends_on:
+      - postgres_database
+      - eureka
+      - rabbitMQ
+
+  role_service:
+    container_name: role_service
+    build: role-Service/
+    ports:
+      - '8086:8086'
+      - '5011:5011'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5011
+    depends_on:
+      - postgres_database
+      - eureka
+      - rabbitMQ
+
+  dishitem_service:
+    container_name: dishitem_service
+    build: dishitem-Service/
+    ports:
+      - '8087:8087'
+      - '5012:5012'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5012
+    depends_on:
+      - postgres_database
+      - eureka
+      - rabbitMQ
+
+  cart_service:
+    container_name: cart_service
+    build: cart-Service/
+    ports:
+      - '8088:8088'
+      - '5013:5013'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5013
+    depends_on:
+      - postgres_database
+      - eureka
+      - rabbitMQ
