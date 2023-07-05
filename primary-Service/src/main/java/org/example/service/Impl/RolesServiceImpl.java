@@ -2,12 +2,7 @@ package org.example.service.Impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.dao.RolesDao;
-import org.example.dao.UserDao;
-import org.example.dto.DishesDto;
 import org.example.dto.RolesDto;
-import org.example.dto.UsersDto;
-import org.example.mapper.RolesMapper;
 import org.example.service.RolesService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;

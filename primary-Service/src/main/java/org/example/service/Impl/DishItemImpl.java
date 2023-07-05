@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.dao.*;
 import org.example.dto.DishForCartDto;
 import org.example.dto.DishItemDto;
-import org.example.mapper.DishItemMapper;
 import org.example.service.DishItemService;
 import org.example.service.Impl.SendType.SendDishItemForCart;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -24,8 +23,6 @@ import java.util.Objects;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class DishItemImpl implements DishItemService {
-    private final DishItemDao dishItemDao;
-    private final DishItemMapper dishItemMapper;
 
     @Value("${routing.key.queue.dishitem.delete}")
     private String dishItemDeleteRoutingKey;

@@ -4,10 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dao.*;
 import org.example.dto.CartsDto;
-import org.example.dto.DishItemDto;
 import org.example.entities.entity.Carts;
 import org.example.entities.entity.Users;
-import org.example.mapper.CartsMapper;
 import org.example.service.CartsService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +13,6 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.SQLException;
@@ -28,19 +25,13 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class CartsServiceImpl implements CartsService {
 
-    private final CartsMapper cartsMapper;
-
-    private final CartsDao cartsDao;
-
-    private final UserDao userDao;
-
     @Value("${routing.key.queue.cart.delete}")
     private String cartDeleteRoutingKey;
     @Value("${routing.key.queue.cart.update}")
     private String cartUpdateRoutingKey;
     @Value("${routing.key.queue.cart.save}")
     private String cartSaveRoutingKey;
-    @Value("${rabbitmq.queue.getbyusername.cart}")
+    @Value("${routing.key.queue.cart.getbyusername}")
     private String cartGetByUserNameRoutingKey;
 
     @Value("${cart.exchange}")

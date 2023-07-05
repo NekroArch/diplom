@@ -164,3 +164,68 @@ services:
       - postgres_database
       - eureka
       - rabbitMQ
+
+  privileges_service:
+    container_name: privileges_service
+    build: privileges-Service/
+    ports:
+      - '8090:8090'
+      - '5015:5015'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5015
+    depends_on:
+      - postgres_database
+      - eureka
+      - rabbitMQ
+
+  status_service:
+    container_name: status_service
+    build: status-Service/
+    ports:
+      - '8091:8091'
+      - '5016:5016'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5016
+    depends_on:
+      - postgres_database
+      - eureka
+      - rabbitMQ
+
+  menu_service:
+    container_name: menu_service
+    build: menu-Service/
+    ports:
+      - '8092:8092'
+      - '5017:5017'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5017
+    depends_on:
+      - postgres_database
+      - eureka
+      - rabbitMQ
+
+  addon_category_service:
+    container_name: addon_category_service
+    build: addon-Category-Service/
+    ports:
+      - '8093:8093'
+      - '5018:5018'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5018
+    depends_on:
+      - postgres_database
+      - eureka
+      - rabbitMQ
+
+  measure_unit_service:
+    container_name: measure_unit_service
+    build: measure-Unit-Service/
+    ports:
+      - '8094:8094'
+      - '5019:5019'
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5019
+    depends_on:
+      - postgres_database
+      - eureka
+      - rabbitMQ

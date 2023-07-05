@@ -30,6 +30,11 @@
         <module>cart-Service</module>
         <module>dishitem-Service</module>
         <module>order-Service</module>
+        <module>privileges-Service</module>
+        <module>menu-Service</module>
+        <module>status-Service</module>
+        <module>addon-Category-Service</module>
+        <module>measure-Unit-Service</module>
     </modules>
 
     <properties>
